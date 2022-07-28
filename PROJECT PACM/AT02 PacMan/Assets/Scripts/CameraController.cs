@@ -47,6 +47,7 @@ public class CameraController : MonoBehaviour
             }
             //Rotate toward target
             transform.LookAt(target);
+
         }
         else
         {

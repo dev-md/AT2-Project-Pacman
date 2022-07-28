@@ -110,22 +110,27 @@ public class Pacman : MonoBehaviour
             transform.forward = Vector3.right;
             motion = transform.forward.normalized;
         }
-        if (input.x < 0)
+        else if (input.x < 0)
         {
             transform.forward = -Vector3.right;
             motion = transform.forward.normalized;
         }
         //Forward/backward movement
-        if (input.y > 0)
+        else if (input.y > 0)
         {
             transform.forward = Vector3.forward;
             motion = transform.forward.normalized;
         }
-        if (input.y < 0)
+        else if (input.y < 0)
         {
             transform.forward = -Vector3.forward;
             motion = transform.forward.normalized;
         }
+        else
+        {
+            motion = transform.forward.normalized;
+        }
+        
         //Apply movement to controller
         controller.Move(motion.normalized * speed * Time.deltaTime);
     }

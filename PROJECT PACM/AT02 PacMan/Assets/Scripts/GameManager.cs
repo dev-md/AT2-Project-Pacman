@@ -17,6 +17,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private AudioClip bonusItemClip;
     [SerializeField] private AudioClip eatGhostClip;
 
+
     //Private variables
     private GameObject bonusItem;
     private int totalPellets = 0;
