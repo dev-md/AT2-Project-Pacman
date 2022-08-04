@@ -59,7 +59,7 @@ public class CameraController : MonoBehaviour
 
     private void OnEnable()
     {
-        transform.position = ourTran.position;
+        transform.position = offsetVector;
         transform.rotation = ourTran.rotation;
     }
 }

@@ -28,14 +28,27 @@ public class ToggleCameraViews : MonoBehaviour
         }
     }
 
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Space) == true)
+        {
+            ToggleViewAngle();
+        }
+    }
 
     private void ToggleViewAngle()
     {
-        if(playerView != null)
+        if((playerView != null)&&(topView != null))
         {
-            if(topView != null)
+            if (playerView.enabled == true)
             {
-                Debug.Log("bruj");
+                playerView.enabled = false;
+                topView.enabled = true;
+            }
+            else if (topView.enabled == true)
+            {
+                playerView.enabled = true;
+                topView.enabled = false;
             }
         }
     }
