@@ -11,6 +11,7 @@ public class CameraController : MonoBehaviour
     //Private variables
     private Transform target;
     private Vector3 offsetVector;
+    private Transform ourTran;
 
     /// <summary>
     /// Find necessary references
@@ -19,6 +20,7 @@ public class CameraController : MonoBehaviour
     {
         //Find target
         target = GameObject.FindGameObjectWithTag("Player").transform;
+        ourTran = transform;
     }
 
     /// <summary>
@@ -53,5 +55,11 @@ public class CameraController : MonoBehaviour
         {
             Debug.LogError("Camera Controller: Camera target must be tagged as 'Player'!");
         }
+    }
+
+    private void OnEnable()
+    {
+        transform.position = ourTran.position;
+        transform.rotation = ourTran.rotation;
     }
 }
