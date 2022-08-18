@@ -8,17 +8,27 @@ using UnityEngine;
 public class OverviewSeer : MonoBehaviour
 {
     //Pos of the top camera
-    [SerializeField] private GameObject tarPos;
+    [SerializeField] private GameObject gameUI;
 
-    private void Update()
+    //Checking if the script is disable
+    private void OnDisable()
     {
-        //if the target pos is not the same as our pos.
-        if(tarPos.transform.position != transform.position)
+        //Checking Game object existing
+        if(gameUI != null)
         {
-            //Then goto the pos of the target with rotation
-            transform.position = tarPos.transform.position;
-            transform.rotation = tarPos.transform.rotation;
-            
+            //If so disable the map
+            gameUI.SetActive(false);
+        }
+    }
+
+    //Checking to see if script is enable.
+    private void OnEnable()
+    {
+        //Checking Game object existing
+        if(gameUI == null)
+        {
+            //Turn on the map.
+            gameUI.SetActive(true);
         }
     }
 }

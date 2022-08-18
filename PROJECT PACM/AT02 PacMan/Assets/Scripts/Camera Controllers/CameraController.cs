@@ -56,10 +56,4 @@ public class CameraController : MonoBehaviour
             Debug.LogError("Camera Controller: Camera target must be tagged as 'Player'!");
         }
     }
-
-    private void OnEnable()
-    {
-        transform.position = offsetVector;
-        transform.rotation = ourTran.rotation;
-    }
 }
