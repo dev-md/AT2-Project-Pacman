@@ -7,12 +7,12 @@ using UnityEngine;
 public class ToggleCameraViews : MonoBehaviour
 {
     private CameraController playerView;
-    private OverviewSeer topView;
+    [SerializeField] private GameObject topView;
 
     //Getting the camera compemnts 
     private void Awake()
     {
-        if(TryGetComponent(out CameraController _playview) == true)
+        if (TryGetComponent(out CameraController _playview) == true)
         {
             playerView = _playview;
         }
@@ -21,13 +21,9 @@ public class ToggleCameraViews : MonoBehaviour
             Debug.Log("WHY NO CAMERA CONTROLLER");
         }
 
-        if (TryGetComponent(out OverviewSeer _topview) == true)
+        if (topView == null)
         {
-            topView = _topview;
-        }
-        else
-        {
-            Debug.Log("WHY NO TOPVIEW CONTROLLER");
+            Debug.Log("WHERE IS THE THING");
         }
     }
 
@@ -51,12 +47,12 @@ public class ToggleCameraViews : MonoBehaviour
             if (playerView.enabled == true)
             {
                 playerView.enabled = false;
-                topView.enabled = true;
+                topView.SetActive(true);
             }
-            else if (topView.enabled == true)
+            else if (playerView.enabled == false)
             {
                 playerView.enabled = true;
-                topView.enabled = false;
+                topView.SetActive(false);
             }
         }
     }
