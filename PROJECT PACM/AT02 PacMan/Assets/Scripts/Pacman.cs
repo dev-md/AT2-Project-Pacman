@@ -8,6 +8,7 @@ public class Pacman : MonoBehaviour
     [SerializeField] private int lives = 3;
     [SerializeField] private float invincibleTime = 3;
     [SerializeField] private float speed = 3;
+    private float maxSpeed; // Added Vars
     [SerializeField] private Transform pacmanSpawn;
     [SerializeField] private GameObject[] lifeIcons;
     [SerializeField] private AudioClip deathClip;
@@ -58,6 +59,10 @@ public class Pacman : MonoBehaviour
         {
             Debug.LogError("Pacman: Collider with 'isTrigger' set to true is required.");
         }
+
+        //Remebering the speed value. // Also Adding new stuff.
+        maxSpeed = speed;
+
     }
 
     /// <summary>
@@ -214,5 +219,26 @@ public class Pacman : MonoBehaviour
             }
         }
         return false;
+    }
+
+
+    //Dylan Mount
+    //25/08/2022
+    public bool toggleSpeed(bool value)
+    {
+        if(value == false)
+        {
+            speed = 0;
+        }
+        else if (value == true)
+        {
+            speed = maxSpeed;
+        }
+        else
+        {
+            Debug.Log("EHHH?");
+        }
+
+        return value;
     }
 }

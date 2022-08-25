@@ -6,19 +6,20 @@ using UnityEngine;
 
 public class ToggleCameraViews : MonoBehaviour
 {
-    private CameraController playerView;
+    [SerializeField] private GameObject player;
+    private Pacman playerScr;
     [SerializeField] private GameObject topView;
 
     //Getting the camera compemnts 
     private void Awake()
     {
-        if (TryGetComponent(out CameraController _playview) == true)
+        if(player.GetComponent<Pacman>() != null)
         {
-            playerView = _playview;
+            playerScr = player.GetComponent<Pacman>();
         }
         else
         {
-            Debug.Log("WHY NO CAMERA CONTROLLER");
+            Debug.Log("WHERE PACMAN ?!?!");
         }
 
         if (topView == null)
@@ -41,17 +42,17 @@ public class ToggleCameraViews : MonoBehaviour
     private void ToggleViewAngle()
     {
         //Check to see if they have the compenets
-        if((playerView != null)&&(topView != null))
+        if((player != null)&&(topView != null)&&(playerScr != null))
         {
             //Toggle switch for scripts
-            if (playerView.enabled == true)
+            if (topView.activeSelf == false)
             {
-                playerView.enabled = false;
+                playerScr.toggleSpeed(false);
                 topView.SetActive(true);
             }
-            else if (playerView.enabled == false)
+            else if (topView.activeSelf == true)
             {
-                playerView.enabled = true;
+                playerScr.toggleSpeed(true);
                 topView.SetActive(false);
             }
         }
