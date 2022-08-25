@@ -12,7 +12,7 @@ public abstract class Ghost : MonoBehaviour
     //Auto-properties
     public Pacman Target { get; private set; }
     public NavMeshAgent Agent { get; private set; }
-    public MeshRenderer GhostRenderer { get; private set; }
+    public SkinnedMeshRenderer GhostRenderer { get; private set; }
     public Material DefaultMaterial { get; private set; }
     public GhostState DefaultState { get; protected set; }
     public GhostState_Flee FleeState { get; private set; }
@@ -25,11 +25,14 @@ public abstract class Ghost : MonoBehaviour
     protected virtual void Awake()
     {
         //Get mesh renderer reference
-        TryGetComponent(out MeshRenderer renderer);
-        if (renderer != null)
+
+        GhostRenderer = GetComponentInChildren<SkinnedMeshRenderer>();
+
+
+        //TryGetComponent(out MeshRenderer renderer);
+        if (GhostRenderer != null)
         {
-            GhostRenderer = renderer;
-            DefaultMaterial = GhostRenderer.material;
+            DefaultMaterial = GhostRenderer.materials[0];
         }
         else
         {
@@ -170,9 +173,16 @@ public class GhostState_Idle : GhostState
 
     public override void OnEnter()
     {
-        if (Instance.GhostRenderer.material != Instance.DefaultMaterial)
+        Material[] mats = Instance.GhostRenderer.materials;
+
+
+        if (Instance.GhostRenderer.materials[0] != Instance.DefaultMaterial)
         {
-            Instance.GhostRenderer.material = Instance.DefaultMaterial;
+            mats[0] = Instance.DefaultMaterial;
+            mats[2] = Instance.DefaultMaterial;
+            mats[4] = Instance.DefaultMaterial;
+            Instance.GhostRenderer.materials = mats;
+
         }
         Instance.Agent.isStopped = true;
     }
@@ -193,9 +203,13 @@ public class GhostState_Chase : GhostState
 
     public override void OnEnter()
     {
-        if (Instance.GhostRenderer.material != Instance.DefaultMaterial)
+        Material[] mats = Instance.GhostRenderer.materials;
+        if (Instance.GhostRenderer.materials[0] != Instance.DefaultMaterial)
         {
-            Instance.GhostRenderer.material = Instance.DefaultMaterial;
+            mats[0] = Instance.DefaultMaterial;
+            mats[2] = Instance.DefaultMaterial;
+            mats[4] = Instance.DefaultMaterial;
+            Instance.GhostRenderer.materials = mats;
         }
         if (Instance.Target != null)
         {
@@ -235,9 +249,13 @@ public class GhostState_Flank : GhostState
 
     public override void OnEnter()
     {
-        if (Instance.GhostRenderer.material != Instance.DefaultMaterial)
+        Material[] mats = Instance.GhostRenderer.materials;
+        if (Instance.GhostRenderer.materials[0] != Instance.DefaultMaterial)
         {
-            Instance.GhostRenderer.material = Instance.DefaultMaterial;
+            mats[0] = Instance.DefaultMaterial;
+            mats[2] = Instance.DefaultMaterial;
+            mats[4] = Instance.DefaultMaterial;
+            Instance.GhostRenderer.materials = mats;
         }
         if (Instance.Target != null)
         {
@@ -278,9 +296,13 @@ public class GhostState_Flee : GhostState
 
     public override void OnEnter()
     {
+        Material[] mats = Instance.GhostRenderer.materials;
         if (fleeMaterial != null)
         {
-            Instance.GhostRenderer.material = fleeMaterial;
+            mats[0] = fleeMaterial;
+            mats[2] = fleeMaterial;
+            mats[4] = fleeMaterial;
+            Instance.GhostRenderer.materials = mats;
         }
         else
         {
@@ -337,9 +359,13 @@ public class GhostState_Respawn : GhostState
 
     public override void OnEnter()
     {
+        Material[] mats = Instance.GhostRenderer.materials;
         if (respawnMaterial != null)
         {
-            Instance.GhostRenderer.material = respawnMaterial;
+            mats[0] = respawnMaterial;
+            mats[2] = respawnMaterial;
+            mats[4] = respawnMaterial;
+            Instance.GhostRenderer.materials = mats;
         }
         else
         {
