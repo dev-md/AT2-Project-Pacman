@@ -10,11 +10,13 @@ public class GridPlacer : MonoBehaviour
     public GameObject prefab;
     //Instantiate(prefab, transform.position, Quaternion.identity);
 
+    private void Start()
+    {
+        Instantiate(prefab, transform.position, Quaternion.identity);
+    }
+
     private void OnTriggerExit(Collider other)
     {
-        if(other.tag == "Grid Tile")
-        {
-            Instantiate(prefab, transform.position, Quaternion.identity);
-        }
+        Instantiate(prefab, transform.position, Quaternion.identity);
     }
 }
