@@ -8,6 +8,7 @@ TagManager:
   - Pellet
   - Power Pellet
   - Ghost
+  - Grid Tile
   layers:
   - Default
   - TransparentFX
