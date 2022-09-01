@@ -196,6 +196,7 @@ public class GhostState_Idle : GhostState
 public class GhostState_Chase : GhostState
 {
     private Transform target;
+    private float disCol = 1.75f;
 
     public GhostState_Chase(Ghost instance) : base(instance)
     {
@@ -227,7 +228,9 @@ public class GhostState_Chase : GhostState
         {
             Instance.Agent.SetDestination(target.position);
         }
-        else
+        
+
+        if(Vector3.Distance(Instance.transform.position, target.position)< disCol)
         {
             if(Instance.Target.Die() == true)
             {
@@ -240,11 +243,15 @@ public class GhostState_Chase : GhostState
 public class GhostState_Flank : GhostState
 {
     private Vector3 offset;
+    private Vector3 readOffset;
+    private Vector2 forwardOffset = new Vector2(1f,1f);
     private Transform target;
+    private float disCol = 1.75f;
 
     public GhostState_Flank(Ghost instance, Vector3 targetOffset) : base(instance)
     {
         offset = targetOffset;
+        readOffset = targetOffset;
     }
 
     public override void OnEnter()
@@ -271,10 +278,33 @@ public class GhostState_Flank : GhostState
     {
         if (Vector3.Distance(Instance.transform.position, target.position) > Instance.Agent.stoppingDistance)
         {
+            if(readOffset.x != 0)
+            {
+                offset.x = Vector3.Distance(Instance.transform.position, target.position) - (readOffset.x/1.5f);
+                if(target.forward.x != 0)
+                {
+                    forwardOffset.x = target.forward.x;
+                }
+                offset.x = Mathf.Clamp(offset.x, 0f, readOffset.x);
+                offset.x *= forwardOffset.x;
+                //Debug.Log(target.forward);
+            }
+            if(readOffset.z != 0)
+            {
+                offset.z = Vector3.Distance(Instance.transform.position, target.position) - (readOffset.z/1.5f);
+                if (target.forward.z != 0)
+                {
+                    forwardOffset.y = target.forward.z;
+                }
+                offset.z = Mathf.Clamp(offset.z, 0f, readOffset.z);
+                offset.z *= forwardOffset.y;
+            }
+
             Instance.Agent.SetDestination(target.position + offset);
             Debug.DrawLine(Instance.transform.position, target.position + offset, Color.magenta);
         }
-        else
+
+        if (Vector3.Distance(Instance.transform.position, target.position) < disCol)
         {
             if (Instance.Target.Die() == true)
             {

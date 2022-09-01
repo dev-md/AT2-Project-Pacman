@@ -144,7 +144,7 @@ public class Pacman : MonoBehaviour
     /// World interactions.
     /// </summary>
     /// <param name="other"></param>
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerStay(Collider other)
     {
         //Detect collisions
         switch (other.tag)
