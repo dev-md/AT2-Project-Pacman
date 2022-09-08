@@ -21,6 +21,10 @@ public class Pacman : MonoBehaviour
     private CharacterController controller;
     private AudioSource aSrc;
 
+    //Sprint vars
+    private float sprintTimer = 0f;
+    [SerializeField] private float sprintSpeed = 2f;
+
     /// <summary>
     /// Creates necessary references.
     /// </summary>
@@ -136,7 +140,29 @@ public class Pacman : MonoBehaviour
         {
             motion = transform.forward.normalized;
         }
-        
+
+        if (Input.GetKey(KeyCode.LeftShift))
+        {
+            
+            if (sprintTimer > 0)
+            {
+                sprintTimer -= Time.deltaTime;
+                if (speed != maxSpeed + sprintSpeed)
+                {
+                    speed += sprintSpeed;
+                }
+            }
+            else
+            {
+                speed = maxSpeed;
+            }
+        }
+        else
+        {
+            speed = maxSpeed;
+        }
+        //Debug.Log(sprintTimer);
+
         //Apply movement to controller
         controller.Move(motion.normalized * speed * Time.deltaTime);
     }
@@ -152,14 +178,17 @@ public class Pacman : MonoBehaviour
         {
             case "Pellet":
                 GameManager.Instance.PickUpPellet(1);
+                sprintTimer += 0.1f;
                 other.gameObject.SetActive(false);
                 break;
             case "Power Pellet":
                 GameManager.Instance.PickUpPellet(1, 1);
+                sprintTimer += 0.25f;
                 other.gameObject.SetActive(false);
                 break;
             case "Bonus Item":
                 GameManager.Instance.PickUpPellet(50, 2);
+                sprintTimer += 3f;
                 other.gameObject.SetActive(false);
                 break;
             case "Ghost":
@@ -169,6 +198,7 @@ public class Pacman : MonoBehaviour
                     if (ghost.CurrentState != ghost.RespawnState)
                     {
                         GameManager.Instance.EatGhost(ghost);
+                        sprintTimer += 0.25f;
                     }
                 }
                 break;
@@ -186,6 +216,7 @@ public class Pacman : MonoBehaviour
         transform.forward = pacmanSpawn.forward;
         controller.enabled = true;
         respawnTimer = 0;
+        GameManager.Instance.RespawnPowerPellet();
     }
 
     /// <summary>
