@@ -10,6 +10,7 @@ public class Pacman : MonoBehaviour
     [SerializeField] private float speed = 3;
     private float maxSpeed; // Added Vars
     [SerializeField] private Transform pacmanSpawn;
+    [SerializeField] private GameObject lifePanel;
     [SerializeField] private GameObject[] lifeIcons;
     [SerializeField] private AudioClip deathClip;
 
@@ -197,7 +198,7 @@ public class Pacman : MonoBehaviour
         {
             //Subtract life
             aSrc.PlayOneShot(deathClip);
-            if (currentLives > 0)
+            if (currentLives > 1)
             {
                 currentLives--;
                 if(currentLives < lifeIcons.Length)
@@ -214,6 +215,7 @@ public class Pacman : MonoBehaviour
             else    //Game over
             {
                 enabled = false;
+                lifePanel.SetActive(false);
                 GameManager.Instance.Delegate_GameOver.Invoke();
                 return true;
             }

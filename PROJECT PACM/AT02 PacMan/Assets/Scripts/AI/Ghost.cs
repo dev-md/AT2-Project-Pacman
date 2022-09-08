@@ -196,7 +196,7 @@ public class GhostState_Idle : GhostState
 public class GhostState_Chase : GhostState
 {
     private Transform target;
-    private float disCol = 1.75f;
+    private float disCol = 1.5f;
 
     public GhostState_Chase(Ghost instance) : base(instance)
     {
@@ -246,7 +246,7 @@ public class GhostState_Flank : GhostState
     private Vector3 readOffset;
     private Vector2 forwardOffset = new Vector2(1f,1f);
     private Transform target;
-    private float disCol = 1.75f;
+    private float disCol = 1.5f;
 
     public GhostState_Flank(Ghost instance, Vector3 targetOffset) : base(instance)
     {

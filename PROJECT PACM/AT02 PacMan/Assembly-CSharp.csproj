@@ -62,12 +62,13 @@
     <Compile Include="Assets\Scripts\GameManager.cs" />
     <Compile Include="Assets\Scripts\UI\ButtonOnClick.cs" />
     <Compile Include="Assets\Scripts\AI\Clyde.cs" />
+    <Compile Include="Assets\Scripts\UI\UIQuitApp.cs" />
     <Compile Include="Assets\Scripts\AI\Blinky.cs" />
+    <Compile Include="Assets\PelletAmountCheck.cs" />
     <Compile Include="Assets\Scripts\AI\Ghost.cs" />
     <Compile Include="Assets\Scripts\AI\Inky.cs" />
     <Compile Include="Assets\Scripts\Camera Controllers\OverviewSeer.cs" />
-    <Compile Include="Assets\Scripts\UI\UIQuitApp.cs" />
-    <Compile Include="Assets\PelletAmountCheck.cs" />
+    <Compile Include="Assets\ShowFleeSad.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">
