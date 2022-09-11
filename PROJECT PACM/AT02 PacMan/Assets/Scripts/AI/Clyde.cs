@@ -34,13 +34,15 @@ public class Clyde : Ghost
                 if (CurrentState == DefaultState)
                 {
                     SetState(FleeState);
+                    time = 5f;
+                    timer = 0;  //Reset timer
                 }
                 else if (CurrentState == FleeState)
                 {
                     SetState(DefaultState);
+                    time = Random.Range(behaviourSwitchTime.x, behaviourSwitchTime.y);  //Set random interval
+                    timer = 0;  //Reset timer
                 }
-                time = Random.Range(behaviourSwitchTime.x, behaviourSwitchTime.y);  //Set random interval
-                timer = 0;  //Reset timer
             }
         }
     }

@@ -280,23 +280,25 @@ public class GhostState_Flank : GhostState
         {
             if(readOffset.x != 0)
             {
-                offset.x = Vector3.Distance(Instance.transform.position, target.position) - (readOffset.x/1.5f);
+                offset.x = Vector3.Distance(Instance.transform.position, target.position);
                 if(target.forward.x != 0)
                 {
                     forwardOffset.x = target.forward.x;
                 }
                 offset.x = Mathf.Clamp(offset.x, 0f, readOffset.x);
+                offset.x -= 1.5f;
                 offset.x *= forwardOffset.x;
                 //Debug.Log(target.forward);
             }
             if(readOffset.z != 0)
             {
-                offset.z = Vector3.Distance(Instance.transform.position, target.position) - (readOffset.z/1.5f);
+                offset.z = Vector3.Distance(Instance.transform.position, target.position);
                 if (target.forward.z != 0)
                 {
                     forwardOffset.y = target.forward.z;
                 }
                 offset.z = Mathf.Clamp(offset.z, 0f, readOffset.z);
+                offset.z -= 1.5f;
                 offset.z *= forwardOffset.y;
             }
 

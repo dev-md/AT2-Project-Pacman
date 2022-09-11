@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Pacman : MonoBehaviour
 {
@@ -24,6 +25,8 @@ public class Pacman : MonoBehaviour
     //Sprint vars
     private float sprintTimer = 0f;
     [SerializeField] private float sprintSpeed = 2f;
+    [SerializeField] private Image sprintFill;
+    [SerializeField] private Text sprintText;
 
     /// <summary>
     /// Creates necessary references.
@@ -42,7 +45,7 @@ public class Pacman : MonoBehaviour
         }
         //Find audio source
         TryGetComponent(out AudioSource audioSource);
-        if(audioSource != null)
+        if (audioSource != null)
         {
             aSrc = audioSource;
         }
@@ -54,13 +57,13 @@ public class Pacman : MonoBehaviour
         bool colliderFound = false;
         foreach (Collider col in GetComponents<Collider>())
         {
-            if(col.isTrigger == true)
+            if (col.isTrigger == true)
             {
                 colliderFound = true;
                 break;
             }
         }
-        if(colliderFound == false)
+        if (colliderFound == false)
         {
             Debug.LogError("Pacman: Collider with 'isTrigger' set to true is required.");
         }
@@ -141,30 +144,25 @@ public class Pacman : MonoBehaviour
             motion = transform.forward.normalized;
         }
 
-        if (Input.GetKey(KeyCode.LeftShift))
+        if ((Input.GetKey(KeyCode.LeftShift)) && (sprintTimer > 0) && (speed != 0))
         {
-            
-            if (sprintTimer > 0)
+            sprintTimer -= Time.deltaTime;
+            if (speed != maxSpeed + sprintSpeed)
             {
-                sprintTimer -= Time.deltaTime;
-                if (speed != maxSpeed + sprintSpeed)
-                {
-                    speed += sprintSpeed;
-                }
-            }
-            else
-            {
-                speed = maxSpeed;
+                speed += sprintSpeed;
             }
         }
         else
         {
-            speed = maxSpeed;
+            if(speed != 0)
+            {
+                speed = maxSpeed;
+            }
         }
-        //Debug.Log(sprintTimer);
 
         //Apply movement to controller
         controller.Move(motion.normalized * speed * Time.deltaTime);
+        UpdateSprintUI();
     }
 
     /// <summary>
@@ -178,12 +176,12 @@ public class Pacman : MonoBehaviour
         {
             case "Pellet":
                 GameManager.Instance.PickUpPellet(1);
-                sprintTimer += 0.1f;
+                sprintTimer += 0.05f;
                 other.gameObject.SetActive(false);
                 break;
             case "Power Pellet":
                 GameManager.Instance.PickUpPellet(1, 1);
-                sprintTimer += 0.25f;
+                sprintTimer += 0.5f;
                 other.gameObject.SetActive(false);
                 break;
             case "Bonus Item":
@@ -198,7 +196,7 @@ public class Pacman : MonoBehaviour
                     if (ghost.CurrentState != ghost.RespawnState)
                     {
                         GameManager.Instance.EatGhost(ghost);
-                        sprintTimer += 0.25f;
+                        sprintTimer *= 1.05f;
                     }
                 }
                 break;
@@ -273,5 +271,25 @@ public class Pacman : MonoBehaviour
         }
 
         return value;
+    }
+
+    private void UpdateSprintUI()
+    {
+        if(sprintTimer > 0)
+        {
+            string _fillerText;
+            _fillerText = sprintTimer.ToString();
+            _fillerText = _fillerText.Substring(0, 1);
+            sprintText.text = _fillerText;
+
+            int _firstDigit = int.Parse(_fillerText);
+            float fillNumber = (sprintTimer - _firstDigit);
+            if (fillNumber > 1)
+            {
+                fillNumber = 1;
+            }
+            sprintFill.fillAmount = fillNumber;
+        }
+        
     }
 }
