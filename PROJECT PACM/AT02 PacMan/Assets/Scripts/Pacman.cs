@@ -196,6 +196,7 @@ public class Pacman : MonoBehaviour
                     if (ghost.CurrentState != ghost.RespawnState)
                     {
                         GameManager.Instance.EatGhost(ghost);
+                        sprintTimer += 0.25f;
                         sprintTimer *= 1.05f;
                     }
                 }
