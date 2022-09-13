@@ -176,12 +176,12 @@ public class Pacman : MonoBehaviour
         {
             case "Pellet":
                 GameManager.Instance.PickUpPellet(1);
-                sprintTimer += 0.05f;
+                sprintTimer += 0.1f;
                 other.gameObject.SetActive(false);
                 break;
             case "Power Pellet":
                 GameManager.Instance.PickUpPellet(1, 1);
-                sprintTimer += 0.5f;
+                sprintTimer += 0.75f;
                 other.gameObject.SetActive(false);
                 break;
             case "Bonus Item":
@@ -240,6 +240,7 @@ public class Pacman : MonoBehaviour
                     Debug.LogError("There are less life icons then the player's current lives.");
                 }
                 RespawnPlayer();
+                sprintTimer += 1f;
                 return false;
             }
             else    //Game over
