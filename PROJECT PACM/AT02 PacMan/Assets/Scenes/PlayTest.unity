@@ -63263,7 +63263,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8eb4821c5a119f147a58d4a59376e4a4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 5
+  speed: 8
   offset: {x: 0, y: 5.5, z: -6}
 --- !u!4 &4820661871782251757
 Transform:
@@ -63517,7 +63517,7 @@ Canvas:
   m_RenderMode: 0
   m_Camera: {fileID: 0}
   m_PlaneDistance: 100
-  m_PixelPerfect: 0
+  m_PixelPerfect: 1
   m_ReceivesEvents: 1
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0

@@ -53,8 +53,8 @@
     <UnityVersion>2020.3.26f1</UnityVersion>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Assets\z Test Scrs\Editor building\GridPlacer.cs" />
     <Compile Include="Assets\Scripts\Camera Controllers\ToggleCameraViews.cs" />
+    <Compile Include="Assets\Scripts\UI\MatchActiveObject.cs" />
     <Compile Include="Assets\Scripts\AI\ShowFleeSad.cs" />
     <Compile Include="Assets\Scripts\AI\Pinky.cs" />
     <Compile Include="Assets\Scripts\Pacman.cs" />
@@ -65,11 +65,9 @@
     <Compile Include="Assets\Scripts\AI\Clyde.cs" />
     <Compile Include="Assets\Scripts\UI\UIQuitApp.cs" />
     <Compile Include="Assets\Scripts\AI\Blinky.cs" />
-    <Compile Include="Assets\z Test Scrs\PelletAmountCheck.cs" />
     <Compile Include="Assets\Scripts\AI\Ghost.cs" />
     <Compile Include="Assets\Scripts\AI\Inky.cs" />
     <Compile Include="Assets\Scripts\Camera Controllers\OverviewSeer.cs" />
-    <Compile Include="Assets\Scripts\UI\MatchActiveObject.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">
