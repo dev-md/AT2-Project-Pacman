@@ -215,7 +215,7 @@ public class Pacman : MonoBehaviour
         transform.forward = pacmanSpawn.forward;
         controller.enabled = true;
         respawnTimer = 0;
-        GameManager.Instance.RespawnPowerPellet();
+        sprintTimer += 2f;
     }
 
     /// <summary>
@@ -240,7 +240,6 @@ public class Pacman : MonoBehaviour
                     Debug.LogError("There are less life icons then the player's current lives.");
                 }
                 RespawnPlayer();
-                sprintTimer += 1f;
                 return false;
             }
             else    //Game over

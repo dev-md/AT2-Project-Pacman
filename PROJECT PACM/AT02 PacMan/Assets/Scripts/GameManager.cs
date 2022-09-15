@@ -253,12 +253,6 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void RespawnPowerPellet()
-    {
-        Event_PickUpPowerPellet.Invoke();
-        PowerUpTimer = 7f;
-    }
-
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
