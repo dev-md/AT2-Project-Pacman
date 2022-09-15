@@ -256,7 +256,7 @@ public class GhostState_Flank : GhostState
 
     public override void OnEnter()
     {
-        Material[] mats = Instance.GhostRenderer.materials;
+        Material[] mats = Instance.GhostRenderer.materials;// Dylan
         if (Instance.GhostRenderer.materials[0] != Instance.DefaultMaterial)
         {
             mats[0] = Instance.DefaultMaterial;
@@ -278,7 +278,8 @@ public class GhostState_Flank : GhostState
     {
         if (Vector3.Distance(Instance.transform.position, target.position) > Instance.Agent.stoppingDistance)
         {
-            if(readOffset.x != 0)
+            // Dylan
+            if (readOffset.x != 0)
             {
                 offset.x = Vector3.Distance(Instance.transform.position, target.position);
                 if(target.forward.x != 0)
@@ -328,7 +329,7 @@ public class GhostState_Flee : GhostState
 
     public override void OnEnter()
     {
-        Material[] mats = Instance.GhostRenderer.materials;
+        Material[] mats = Instance.GhostRenderer.materials; // Dylan
         if (fleeMaterial != null)
         {
             mats[0] = fleeMaterial;

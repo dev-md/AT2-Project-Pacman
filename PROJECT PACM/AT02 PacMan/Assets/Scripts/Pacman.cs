@@ -22,7 +22,7 @@ public class Pacman : MonoBehaviour
     private CharacterController controller;
     private AudioSource aSrc;
 
-    //Sprint vars
+    //Sprint vars // Dylan
     private float sprintTimer = 0f;
     [SerializeField] private float sprintSpeed = 2f;
     [SerializeField] private Image sprintFill;
@@ -144,6 +144,7 @@ public class Pacman : MonoBehaviour
             motion = transform.forward.normalized;
         }
 
+        // Dylan
         if ((Input.GetKey(KeyCode.LeftShift)) && (sprintTimer > 0) && (speed != 0))
         {
             sprintTimer -= Time.deltaTime;
